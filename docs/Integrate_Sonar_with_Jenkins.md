@@ -52,4 +52,5 @@ On the Jenkins Dashboard >> New Item >> Give Name to Youre Jenkins Job >> Click 
     sonar.projectVersion=1.0
     sonar.sources=.
     ```
-    
+
+11. Trigger jenkins build.
