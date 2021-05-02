@@ -38,7 +38,7 @@
 
 9. Create a Jenkins Job for Sonar-Jenkins Integration.
 
-On the Jenkins Dashboard >> New Item >> Give Name to Youre Jenkins Job >> Click on Free Style Project >> Clck on OK.
+    On the Jenkins Dashboard >> New Item >> Give Name to Youre Jenkins Job >> Click on Free Style Project >> Clck on OK.
 
 10. Under Source Code  Management select **git** Repository and Provide the Github Codebase URL.
 
