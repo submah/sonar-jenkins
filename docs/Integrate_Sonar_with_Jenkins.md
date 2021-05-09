@@ -23,7 +23,7 @@
 
 6. To Install the SonarScanner Pluging, Navigateto 
    
-   Manage Jenkins >> Manage Plugins >> Available Tab >> Search for **SonarQube Scanner for Jenkins** >> Install the Plugin >> restart the Jenkins.
+   Manage Jenkins >> Manage Plugins >> Available Tab >> Search for **SonarQube Scanner** >> Install the Plugin >> restart the Jenkins.
 
 7. Login to SonarServer and generate a Token.   
 
