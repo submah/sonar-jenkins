@@ -50,6 +50,16 @@ Find the following lines at the bottom of the file and change peer to trust and 
 ```
 <img src="../images/peer-to-trust.JPG">
 
+**Start and enable PostgreSQL**
+```bash
+systemctl start postgresql-10
+systemctl enable postgresql-10
+```
+>**Note** You can verify the installation using the following version select query.
+```bash
+sudo -u postgres /usr/pgsql-10/bin/psql -c "SELECT version();"
+```
+
 
 
 
