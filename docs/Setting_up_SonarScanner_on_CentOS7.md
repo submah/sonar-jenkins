@@ -59,7 +59,7 @@ systemctl enable postgresql-10
 sudo -u postgres /usr/pgsql-10/bin/psql -c "SELECT version();"
 ```
 
-## Setup Sonar User and Database
+## Setup Sonarqube User and Database
 ```bash
 #Change the default password of the Postgres user. All Postgres commands have to be executed from this user.
 
