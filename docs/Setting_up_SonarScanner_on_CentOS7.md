@@ -29,6 +29,15 @@ ulimit -n 131072
 ulimit -u 8192
 
 ```
+## Open the file /etc/security/limit.conf
+```
+vi /etc/security/limits.conf
+#add the below lines
+elasticsearch   soft    nofile          65536
+elasticsearch   hard    nofile          65536
+elasticsearch   memlock unlimited
+sonarqube - nofile 65535
+```
 
 **Setup PostgreSQL 10 Database For SonarQube**
 ```bash
@@ -69,7 +78,7 @@ sudo passwd postgres #set the password as postgres
 
 su - postgres
 
-#create user sonar
+#create user sonarqube
 
 createuser sonarqube
 
@@ -80,13 +89,13 @@ psql
 
 create database sonarqubedb;
 
-#Create the sonarqube DB user with a strongly encrypted password. Replace your-strong-password with a strong password.
+#Create the sonar DB user with a strongly encrypted password. Replace your-strong-password with a strong password.
 
-create user sonarqube with encrypted password 'your-strong-password'; 
+create user sonar with encrypted password 'your-strong-password'; 
 
 #Next, grant all privileges to sonrqube user on sonarqubedb.
 
-grant all privileges on database sonarqubedb to sonarqube
+grant all privileges on database sonarqubedb to sonar
 
 #Exit the psql prompt using the following command.
 
@@ -117,9 +126,11 @@ vi /opt/sonarqube/conf/sonar.properties
 You will find jdbc parameter under PostgreSQL section
 
 ```text
-sonar.jdbc.username=sonarqube                                 
+sonar.jdbc.username=sonar
 sonar.jdbc.password=your-strong-password
 sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube
+sonar.web.context=/sonar
+sonar.web.javaOpts=-Xmx2048m -Xms1024m -XX:+HeapDumpOnOutOfMemoryError
 ```
 
 >**Note** By default, sonar will run on 9000. If you want on port 80 or any other port, change the following parameters for accessing the web console on that specific port.
@@ -160,7 +171,7 @@ cd /opt/sonarqube/bin/linux-x86-64
 
 #Open the SonarQube startup script and specify the sonarqube user details.
 
-vi /opt/sonarqube/bin/linux-x86-64/sonar.sh
+vi /opt/sonarqube/bin/linux-x86-64/sonar.sh +49
 
 #add below line
 
