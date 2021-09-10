@@ -96,6 +96,122 @@ exit
 ```
 
 ## Setup Sonarqube Web Server
+```bash
+#Download the latest sonarqube installation file to /opt folder. You can get the latest download link from here. http://www.sonarqube.org/downloads/
+
+cd /opt
+
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.0.1.46107.zip
+
+#Unzip sonarqube source files and rename the folder.
+
+unzip sonarqube-9.0.1.46107.zip
+
+mv sonarqube-9.0.1.46107 sonarqube
+
+# Open /opt/sonarqube/conf/sonar.properties file.
+
+vi /opt/sonarqube/conf/sonar.properties
+
+```
+>**Note** Uncomment and edit the parameters as shown below. Change the password accordingly. 
+You will find jdbc parameter under PostgreSQL section
+
+```text
+sonar.jdbc.username=sonarqube                                 
+sonar.jdbc.password=your-strong-password
+sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube
+```
+
+>**Note** By default, sonar will run on 9000. If you want on port 80 or any other port, change the following parameters for accessing the web console on that specific port.
+
+```
+sonar.web.host=0.0.0.0
+sonar.web.port=80
+```
+>**Note** If you want to access sonarqube some path like http://url:/sonar, change the following parameter.
+
+```
+sonar.web.context=/sonar
+```
+
+## Add Sonarqube User and Privileges
+
+```bash
+#Create a user named sonarqube
+
+useradd sonarqube
+
+#make it the owner of the /opt/sonarqube directory.
+
+chown -R sonarqube:sonarqube /opt/sonarqube
+```
+
+## Start Sonarqube Service
+To start sonar service, you need to use the script in sonarqube bin directory.
+
+```bash
+#Login as sonarqube user
+
+sudo su - sonarqube
+
+#Navigate to the start script directory.
+
+cd /opt/sonarqube/bin/linux-x86-64
+
+#Open the SonarQube startup script and specify the sonarqube user details.
+
+vi /opt/sonarqube/bin/linux-x86-64/sonar.sh
+
+#add below line
+
+RUN_AS_USER=sonarqube
+
+#Start the sonarqube service
+
+./sonar.sh start
+
+#Check the application status. If it is in running state, you can access the sonarqube dashboard using the DNS name or Ip address of your server:9000/sonar
+
+./sonar.sh status
+```
+
+## Setting up Sonarqube as a service
+
+```bash
+#Create a file /etc/systemd/system/sonarqube.service
+
+vi  /etc/systemd/system/sonarqube.service
+
+#Copy the following content on to the file.
+```
+```text
+[Unit]
+Description=SonarQube service
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=sonarqube
+Group=sonarqube
+PermissionsStartOnly=true
+ExecStart=/bin/nohup java -Xms32m -Xmx32m -Djava.net.preferIPv4Stack=true -jar /opt/sonarqube/lib/sonar-application-9.0.1.46107.jar
+StandardOutput=syslog
+LimitNOFILE=65536
+LimitNPROC=8192
+TimeoutStartSec=5
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+## Start and enable sonarqube
+```bash
+systemctl start sonarqube
+systemctl enable sonarqube
+systemctl status  sonarqube
+```
+
 
 
 
