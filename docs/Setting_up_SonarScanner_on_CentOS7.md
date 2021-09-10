@@ -29,7 +29,7 @@ ulimit -n 131072
 ulimit -u 8192
 
 ```
-## Open the file /etc/security/limit.conf
+## Open the file /etc/security/limits.conf
 ```
 vi /etc/security/limits.conf
 #add the below lines
