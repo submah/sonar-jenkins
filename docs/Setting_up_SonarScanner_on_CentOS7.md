@@ -217,6 +217,7 @@ WantedBy=multi-user.target
 ```
 ## Start and enable sonarqube
 ```bash
+systemctl daemon-reload
 systemctl start sonarqube
 systemctl enable sonarqube
 systemctl status  sonarqube
