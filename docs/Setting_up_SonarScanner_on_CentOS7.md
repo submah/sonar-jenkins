@@ -48,7 +48,7 @@ vi /var/lib/pgsql/10/data/pg_hba.conf
 
 Find the following lines at the bottom of the file and change peer to trust and idnet to md5
 ```
-
+<img src="../images/peer-to-trust.JPG">
 
 
 
