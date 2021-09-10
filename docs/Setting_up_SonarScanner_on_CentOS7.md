@@ -1,10 +1,9 @@
 <img src="../images/c4logo.png">
 
-## =========================================================
 
 ## Install and configure Sonar on Centos 7
 
-## =========================================================
+
 
 ## Sonarqube requirements
 1. Server with minimum 2GB/1 vcpu capacity
