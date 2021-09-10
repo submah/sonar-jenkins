@@ -60,6 +60,44 @@ systemctl enable postgresql-10
 sudo -u postgres /usr/pgsql-10/bin/psql -c "SELECT version();"
 ```
 
+## Setup Sonar User and Database
+```bash
+#Change the default password of the Postgres user. All Postgres commands have to be executed from this user.
+
+sudo passwd postgres #set the password as postgres
+
+#Login as postgres user with the new password.
+
+su - postgres
+
+#create user sonar
+
+createuser sonarqube
+
+#Login to the PostgreSQL CLI.
+psql
+
+#Create a sonarqubedb database
+
+create database sonarqubedb;
+
+#Create the sonarqube DB user with a strongly encrypted password. Replace your-strong-password with a strong password.
+
+create user sonarqube with encrypted password 'your-strong-password'; 
+
+#Next, grant all privileges to sonrqube user on sonarqubedb.
+
+grant all privileges on database sonarqubedb to sonarqube
+
+#Exit the psql prompt using the following command.
+
+\q
+exit
+```
+
+## Setup Sonarqube Web Server
+
+
 
 
 
