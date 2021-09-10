@@ -46,9 +46,9 @@ yum install postgresql10-server postgresql10-contrib -y
 
 vi /var/lib/pgsql/10/data/pg_hba.conf
 
-Find the following lines at the bottom of the file and change 
-peer | to trust|
-peer to trust and idnet to md5
+Find the following lines at the bottom of the file and change peer to trust and idnet to md5
+```
+
 
 
 
